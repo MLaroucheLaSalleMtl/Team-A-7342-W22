@@ -11,6 +11,8 @@ public class Locomotion : MonoBehaviour
     private Vector2 direction = new Vector2();
     [SerializeField] private float speed = 300.0f;
     private Animator anim;
+    private bool attack;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,10 +25,13 @@ public class Locomotion : MonoBehaviour
         anim.SetFloat("h", direction.x);
         anim.SetFloat("v", direction.y);
         anim.SetFloat("magnitude", rigidbody.velocity.magnitude);
+        
+        
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        
         direction = context.ReadValue<Vector2>();
 
     }
@@ -38,14 +43,24 @@ public class Locomotion : MonoBehaviour
     }
     public void OnFire(InputAction.CallbackContext context)
     {
-
+        attack = context.performed;
+    }
+    private void Attack()
+    {
+       while(attack)
+        {
+            anim.SetBool("isAttack", true);
+        }
+        attack = false;
+       
     }
 
-    private 
-    // Update is called once per frame
+  
     void FixedUpdate()
     {
-        Animate();
         Move();
+        Attack();
+        Animate();
     }
+    
 }
