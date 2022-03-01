@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum StateType //list out all the types of state
 {
-    Idle, Patrol, Attack
+    Idle, Patrol, Chase, Attack
 }
 
 [Serializable] 
@@ -13,9 +13,16 @@ public class Parameters
 {
     public int health;
     public float moveSpeed;
-    public Transform[] patrolPoints;
-    //public Transform[] chasePoints;
+    public float chaseSpeed;
+    public float idleTime;
+    public Transform[] patrolPoints;//only for those small monster
+    public Transform[] chasePoints;
+    public Transform target;
     public Animator anim;
+
+    public LayerMask targetLayer;
+    public float attackRange;
+    public Transform attackPoint;
 
 }
 public class FSM : MonoBehaviour
@@ -26,9 +33,12 @@ public class FSM : MonoBehaviour
 
     void Start()
     {
+        param.anim = GetComponent<Animator>();
+
         states.Add(StateType.Idle, new IdleState(this));
         states.Add(StateType.Patrol, new PatrolState(this));
-
+        states.Add(StateType.Chase, new ChaseState(this));
+        states.Add(StateType.Attack, new AttackState(this));
 
         StateTransit(StateType.Idle);//start from idle state
 
@@ -37,7 +47,7 @@ public class FSM : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        currState.OnUpdate();
     }
 
     public void StateTransit(StateType type)
@@ -65,4 +75,23 @@ public class FSM : MonoBehaviour
             }
         }
     }
+
+    //if player enter the active area,(hit the collider)
+    private void OnTriggerEnter2D(Collider2D collision) 
+    {
+        if (collision.CompareTag("Player"))
+        {
+            param.target = collision.transform;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            param.target = null;
+        }
+    }
+
+
 }

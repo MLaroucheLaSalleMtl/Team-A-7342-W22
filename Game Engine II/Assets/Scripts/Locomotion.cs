@@ -47,11 +47,11 @@ public class Locomotion : MonoBehaviour
     }
     private void Attack()
     {
-       while(attack)
+        if (attack == true)
         {
-            anim.SetBool("isAttack", true);
+            anim.SetTrigger("isAttack");
+            attack = false;
         }
-        attack = false;
        
     }
 

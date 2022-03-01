@@ -8,6 +8,7 @@ public class IdleState : IState
     private FSM manager;
     private Parameters param;
 
+    private float timer;
     public IdleState(FSM manager)
     {
         this.manager = manager;
@@ -15,16 +16,22 @@ public class IdleState : IState
     }
     public void OnEnter()
     {
-
+        param.anim.Play("Bat_Move");
     }
 
     public void OnUpdate()
     {
-
+        timer += Time.deltaTime;
+        if(timer >= param.idleTime)
+        {
+            manager.StateTransit(StateType.Patrol);
+        }
     }
 
     public void OnExit()
     {
-
+        timer = 0;
     }
 }
+
+
