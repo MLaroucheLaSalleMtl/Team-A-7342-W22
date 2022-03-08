@@ -17,7 +17,7 @@ public class ChaseState : IState
     public void OnEnter()
     {
         //play the chase anim
-        param.anim.Play("Bat_Move");
+        param.anim.Play("Evil Wizard_Chase");
     }
 
     public void OnUpdate()
@@ -34,6 +34,10 @@ public class ChaseState : IState
              manager.transform.position.x > param.chasePoints[1].position.x) 
         {
             manager.StateTransit(StateType.Idle);
+        }
+        if(Physics2D.OverlapCircle(param.attackPoint.position, param.attackRange, param.targetLayer))
+        {
+            manager.StateTransit(StateType.Attack);
         }
     }
 

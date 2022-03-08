@@ -7,70 +7,55 @@ public class MonstersMovement : MonoBehaviour
 
     public float moveSpeed;
     private Rigidbody2D myRigidbody;
+    private bool moving;
 
-    public bool isWalking;
-    public float walkTime;
-    private float walkCounter;
-    public float waitTime;
-    private float waitCounter;
+    public float timeBetweenMove;
+    private float timeBetweenMoveCounter;
+    public float timeToMove;
+    private float timeToMoveCounter;
 
-    private int WalkDirection;
+    private Vector3 moveDirection;
 
     // Start is called before the first frame update
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
 
-        waitCounter = waitTime;
-        walkCounter = walkTime;
-
-        ChooseDirection();
+        timeBetweenMoveCounter = Random.Range(timeBetweenMove * 0.75f, timeBetweenMove * 1.25f);
+        timeToMoveCounter = Random.Range(timeToMove * 0.75f, timeBetweenMove * 1.25f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isWalking)
+        if (moving)
         {
-            walkCounter -= Time.deltaTime;
+            timeToMoveCounter -= Time.deltaTime;
+            myRigidbody.velocity = moveDirection;
 
-            switch(WalkDirection)
+            if (timeToMoveCounter < 0f)
             {
-                case 0:
-                    myRigidbody.velocity = new Vector2(0, moveSpeed);
-                    break;
-                case 1:
-                    myRigidbody.velocity = new Vector2(moveSpeed, 0);
-                    break;
-                case 2:
-                    myRigidbody.velocity = new Vector2(0, -moveSpeed);
-                    break;
-                case 3:
-                    myRigidbody.velocity = new Vector2(-moveSpeed, 0);
-                    break;
-            }
+                moving = false;
+                timeBetweenMoveCounter = Random.Range(timeBetweenMove * 0.75f, timeBetweenMove * 1.25f);
 
-            if (walkCounter < 0)
-            {
-                isWalking = false;
-                waitCounter = waitTime;
             }
         }
         else
         {
-            waitCounter -= Time.deltaTime;
+            timeBetweenMoveCounter -= Time.deltaTime;
             myRigidbody.velocity = Vector2.zero;
-            if (waitCounter < 0)
+
+            if (timeBetweenMoveCounter < 0f)
             {
-                ChooseDirection();
+                moving = true;
+                timeToMoveCounter = Random.Range(timeToMove * 0.75f, timeBetweenMove * 1.25f);
+
+                moveDirection = new Vector3(Random.Range(-1f, 1f) * moveSpeed, Random.Range(-1f, 1f) * moveSpeed, 0f);
             }
         }
     }
 
-    public void ChooseDirection()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        WalkDirection = Random.Range(0, 4);
-        isWalking = true;
-        walkCounter = walkTime;
     }
 }
