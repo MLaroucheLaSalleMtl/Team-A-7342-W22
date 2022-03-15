@@ -21,7 +21,7 @@ public class EnemyHPManager : MonoBehaviour
         }
     }
 
-    public void HurtEnemy(int damage)
+    public void MonsterTakeDamage(int damage)
     {
         enemyCurrentHP -= damage;
     }

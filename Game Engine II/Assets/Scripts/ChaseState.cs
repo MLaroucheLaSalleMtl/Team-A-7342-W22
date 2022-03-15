@@ -30,11 +30,13 @@ public class ChaseState : IState
                 param.target.position, param.chaseSpeed * Time.deltaTime);
         }
         //if there is no target, and target is out of the range of active, then switch back to idle state.
-        if (param.target== null || manager.transform.position.x < param.chasePoints[0].position.x ||
+        if (param.target == null || 
+            manager.transform.position.x < param.chasePoints[0].position.x ||
              manager.transform.position.x > param.chasePoints[1].position.x) 
         {
             manager.StateTransit(StateType.Idle);
         }
+        
         if(Physics2D.OverlapCircle(param.attackPoint.position, param.attackRange, param.targetLayer))
         {
             manager.StateTransit(StateType.Attack);

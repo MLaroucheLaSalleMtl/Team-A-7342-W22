@@ -24,13 +24,14 @@ public class IdleState : IState
         timer += Time.deltaTime;
 
         //if target is not null, and within the range of chasing
-        //if(param.target != null && param.target.position.x >= param.chasePoints[0].position.x &&
-        //     param.target.position.x <= param.chasePoints[1].position.x)
-        //{
-        //    manager.StateTransit(StateType.Idle);
-        //}
+        if (param.target != null &&
+            param.target.position.x >= param.chasePoints[0].position.x &&
+             param.target.position.x <= param.chasePoints[1].position.x)
+        {
+            manager.StateTransit(StateType.React);
+        }
 
-        if(timer >= param.idleTime)
+        if (timer >= param.idleTime)
         {
             manager.StateTransit(StateType.Patrol);
         }
@@ -38,6 +39,7 @@ public class IdleState : IState
 
     public void OnExit()
     {
+        //reset the timer
         timer = 0;
     }
 }

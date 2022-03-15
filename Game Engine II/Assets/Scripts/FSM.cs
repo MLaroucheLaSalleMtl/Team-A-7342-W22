@@ -21,6 +21,8 @@ public class Parameters
     public Animator anim;
 
     public LayerMask targetLayer;
+
+    //circle gizmo 
     public float attackRange;
     public Transform attackPoint;
 
@@ -30,19 +32,21 @@ public class FSM : MonoBehaviour
 {
     private IState currState;
     private Dictionary<StateType, IState> states = new Dictionary<StateType, IState>();
-    public Parameters param = new Parameters();
+    public Parameters param;
 
     void Start()
     {
         
 
         states.Add(StateType.Idle, new IdleState(this));
-        states.Add(StateType.Patrol, new PatrolState(this));    
+        states.Add(StateType.Patrol, new PatrolState(this));
+        states.Add(StateType.React, new ReactState(this));
         states.Add(StateType.Chase, new ChaseState(this));
         states.Add(StateType.Attack, new AttackState(this));
+        
 
         StateTransit(StateType.Idle);//start from idle state
-        param.anim = GetComponent<Animator>();
+        param.anim = transform.GetComponent<Animator>();
 
     }
 
@@ -95,6 +99,7 @@ public class FSM : MonoBehaviour
         }
     }
 
+    //draw the circle gizmo to 
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(param.attackPoint.position, param.attackRange);

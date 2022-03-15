@@ -54,8 +54,6 @@ public class Locomotion : MonoBehaviour
         }
        
     }
-
-  
     void FixedUpdate()
     {
         Move();

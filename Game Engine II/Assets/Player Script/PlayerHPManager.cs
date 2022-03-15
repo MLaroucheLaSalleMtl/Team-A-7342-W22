@@ -15,7 +15,7 @@ public class PlayerHPManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerCurrentHP == 0)
+        if (playerCurrentHP <= 0)
         {
             gameObject.SetActive(false);
         }
