@@ -483,7 +483,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8439741904961233879, guid: fba34285b4f1085499245b41c2e36ba9, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8439741905921531514, guid: fba34285b4f1085499245b41c2e36ba9, type: 3}
       propertyPath: m_Name
@@ -491,7 +491,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8439741905921531514, guid: fba34285b4f1085499245b41c2e36ba9, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8439741905921531514, guid: fba34285b4f1085499245b41c2e36ba9, type: 3}
       propertyPath: m_TagString
@@ -543,7 +543,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8439741906068559416, guid: fba34285b4f1085499245b41c2e36ba9, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fba34285b4f1085499245b41c2e36ba9, type: 3}
@@ -31871,7 +31871,7 @@ PrefabInstance:
       objectReference: {fileID: 1042087917}
     - target: {fileID: 2221581248713234660, guid: 5014a57b8cc0f604d9a87f0ecf478144, type: 3}
       propertyPath: param.targetLayer.m_Bits
-      value: 64
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 2221581248713234660, guid: 5014a57b8cc0f604d9a87f0ecf478144, type: 3}
       propertyPath: param.chasePoints.Array.data[0]

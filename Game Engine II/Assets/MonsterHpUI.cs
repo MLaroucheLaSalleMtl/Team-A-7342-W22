@@ -17,6 +17,6 @@ public class MonsterHpUI : MonoBehaviour
     void Update()
     {
         HPBar.maxValue = enemyHP.enemyMaxHP;
-        HPBar.value = enemyHP.enemyCurrentHP;
+        HPBar.value = enemyHP.EnemyCurrentHP;
     }
 }

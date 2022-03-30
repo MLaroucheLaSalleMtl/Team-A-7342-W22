@@ -39,6 +39,7 @@ public class ChaseState : IState
         
         if(Physics2D.OverlapCircle(param.attackPoint.position, param.attackRange, param.targetLayer))
         {
+            Debug.Log("Evil");
             manager.StateTransit(StateType.Attack);
         }
     }

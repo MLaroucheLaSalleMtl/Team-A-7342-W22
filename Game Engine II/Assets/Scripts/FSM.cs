@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum StateType //list out all the types of state
 {
-    Idle, Patrol, React, Chase, Attack
+    Idle, Patrol, React, Chase, Attack, Hit, Death
 }
 
 [Serializable] 
@@ -43,7 +43,8 @@ public class FSM : MonoBehaviour
         states.Add(StateType.React, new ReactState(this));
         states.Add(StateType.Chase, new ChaseState(this));
         states.Add(StateType.Attack, new AttackState(this));
-        
+        states.Add(StateType.Hit, new isHitState(this));
+        states.Add(StateType.Death, new DeathState(this));
 
         StateTransit(StateType.Idle);//start from idle state
         param.anim = transform.GetComponent<Animator>();
@@ -99,7 +100,7 @@ public class FSM : MonoBehaviour
         }
     }
 
-    //draw the circle gizmo to 
+    //draw the circle gizmo to define its attack range
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(param.attackPoint.position, param.attackRange);
