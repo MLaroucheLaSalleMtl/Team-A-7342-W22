@@ -27,6 +27,7 @@ public class Parameters
     public Transform attackPoint;
 
     public bool isHit;
+    
 }
 public class FSM : MonoBehaviour
 {
