@@ -373,7 +373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd8dd87f43236774fac505fd81b5a12e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMaxHP: 10
+  playerMaxHP: 25
   playerCurrentHP: 0
 --- !u!1 &6158189615148882774
 GameObject:
